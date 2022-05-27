@@ -90,7 +90,18 @@
             </table>
         </div>
        
+        <div class="DT">
+            <h1 style="text-align: center; margin-top:100px;">Bảng báo cáo doanh thu</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Doanh thu</th>
 
+                    </tr>
+                </thead>
+            </table>
+        </div>
     <script>
         var roomList = {
             "Phòng tổng thống": [
@@ -156,11 +167,19 @@
             <td>${productList[i].TKH}</td>
             <td>${productList[i].roomtype}</td>
             <td>${productList[i].money}</td>
-            <td><button class="btn btn-warning">Edit</button></td>
+            <td><button class="btn btn-warning" onclick="editProduct(${i})">Edit</button></td>
             <td><button class="btn btn-danger" onclick="deleteProduct(${i})">Delete</button></td>
         </tr>`
          }
        }
+       function editProduct(index) {
+           var product = productList[index]
+           console.log(product)
+           document.getElementById('TKH').value = product.TKH
+           document.getElementById('roomtyoe').value = product.roomtype
+           document.getElementById('money').value = product.money
+       }
+       
     </script>
 </body>
 </html>
