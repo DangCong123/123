@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <STyle>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .container{
+            width: 900px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .td{
+            margin-top: 50px;
+        }
+        .td h1{
+            text-align: center;
+        }
+        .Room-groud{
+            margin: 20px;
+        }
+        .Room-groud label{
+            font-size: 20px;
+        }
+        .search {
+            padding-left: 60px;
+          margin: 20px;
+        }
+    </STyle>
+</head>
+<body>
+    <div class="container">
+        <div class="td">
+            <h1>DANH MỤC PHÒNG</h1>
+        </div>
+        <div class="Room-groud">
+            <label>Tên khách hàng</label>
+            <input type="text" style="width:300px;height: 30px;" id="TKH">
+        </div>
+        <div class="Room-groud">
+            <label>Loại Phòng:</label>
+            <select name="form-control" id="roomtype" onchange="changeroom()">
+                <option value="">--- chọn ---</option>
+            </select>
+        </div>
+        <div class="Room-groud">
+            <label>Đơn giá:</label>
+            <select name="form-control" id="money">
+                <option value="">--- chọn ---</option>
+            </select>
+        </div>
+        <div class="Room-groud">
+            <label>Phòng:</label>
+            <select name="form-control" id="Home">
+                <option value="">--- chọn ---</option>
+                <option value="">101</option>
+                <option value="">102</option>
+                <option value="">103</option>
+                <option value="">201</option>
+                <option value="">202</option>
+                <option value="">203</option>
+                <option value="">301</option>
+                <option value="">302</option>
+            </select>
+        </div>
+        <div class="Room-groud">
+            <label>Ghi Chú:</label>
+           <input type="text" placeholder ="Mỗi loại phòng 1 khách sạn riêng" style="width: 300px; height: 50px;">
+        </div>
+        <div class="search">
+            <button onclick="addProduct()">Add Product</button>
+            <button scr="" >Xóa</button>
+        </div>
+        <div class="panel-body" style="margin-top: 100px;">
+            <h1 style="text-align: center;">Phiếu Thuê Phòng</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên Khách hàng</th>
+                        <th>Loại Phòng</th>
+                        <th>Đơn giá</th>
+                    </tr>
+                </thead>
+                <tbody id="result"></tbody>
+            </table>
+        </div>
+       
+
+    <script>
+        var roomList = {
+            "Phòng tổng thống": [
+                "50.000.000đ", "30.000.000đ", "20.000.000đ"
+            ],
+            "Phong vip": [
+                "10.000.000đ", "5.000.000đ", "3.000.000đ$"
+            ],
+            "Phòng bình dân": [
+                "1.000.000đ$", "500.000đ", "300.000đ"
+            ]
+        }
+        var roomTag = document.getElementById('roomtype')
+        for(var key in roomList) {
+            roomTag.innerHTML += `<option value='${key}'>${key}</option>`
+        }
+        function changeroom() {
+            key = roomTag.value
+            moneyList = roomList[key]
+            var moneyTag = document.getElementById('money')
+            moneyTag.innerHTML =''
+            if(moneyList != null) {
+                for (var i = 0; i < moneyList.length; i++){
+                    moneyTag.innerHTML += `<option value='${moneyList[i]}'>${moneyList[i]}</option>`
+                }
+            }
+        }
+
+        var count = 0;
+       function addProduct(){
+        var TKH = document.getElementById('TKH').value
+        var roomtype = document.getElementById('roomtype').value
+        var money = document.getElementById('money').value
+      
+
+        document.getElementById('result').innerHTML += `<tr>
+            <td>${++count}</td>
+            <td>${TKH}</td>
+            <td>${roomtype}</td>
+            <td>${money}</td>
+            <td><button class="btn btn-warning">Edit</button></td>
+            <td><button class="btn btn-danger">Delete</button></td>
+        </tr>`
+       }
+    </script>
+</body>
+</html>
